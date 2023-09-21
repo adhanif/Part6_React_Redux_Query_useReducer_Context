@@ -11,14 +11,8 @@ const store = createStore(noteReducer);
 function App() {
   store.subscribe(() => {
     const storeNow = store.getState();
-    console.log(storeNow);
+    // console.log(storeNow);
   });
-
-  // store.dispatch({ type: "INCREMENT" });
-  // store.dispatch({ type: "INCREMENT" });
-  // store.dispatch({ type: "INCREMENT" });
-  // store.dispatch({ type: "ZERO" });
-  // store.dispatch({ type: "DECREMENT" });
 
   store.dispatch({
     type: "NEW_NOTE",
