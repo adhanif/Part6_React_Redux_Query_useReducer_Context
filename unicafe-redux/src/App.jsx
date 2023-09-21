@@ -1,47 +1,45 @@
-import { useState } from "react";
 import "./App.css";
-
-import { createStore } from "redux";
-import counterReducer from "./reducer";
-import noteReducer from "./reducers/noteReducer";
-
+// import { createStore } from "redux";
+import Button from "./components/Button";
+// import counterReducer from "./reducers/counterReducer";
 // const store = createStore(counterReducer);
-const store = createStore(noteReducer);
+function App({ store }) {
+  console.log(store.getState());
+  const good = () => {
+    store.dispatch({
+      type: "GOOD",
+    });
+  };
+  const ok = () => {
+    store.dispatch({
+      type: "OK",
+    });
+  };
 
-function App() {
-  store.subscribe(() => {
-    const storeNow = store.getState();
-    // console.log(storeNow);
-  });
+  const bad = () => {
+    store.dispatch({
+      type: "BAD",
+    });
+  };
 
-  store.dispatch({
-    type: "NEW_NOTE",
-    payload: {
-      content: "the app state is in redux store",
-      important: true,
-      id: 1,
-    },
-  });
-
-  store.dispatch({
-    type: "NEW_NOTE",
-    payload: {
-      content: "state changes are made with actions",
-      important: false,
-      id: 2,
-    },
-  });
+  const reset = () => {
+    store.dispatch({
+      type: "ZERO",
+    });
+  };
 
   return (
-    <div>
-      <ul>
-        {store.getState().map((note) => (
-          <li key={note.id}>
-            {note.content} <strong>{note.important ? "important" : ""}</strong>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <div style={{ display: "flex" }}>
+        <Button handleClick={good} text={"good"} />
+        <Button handleClick={ok} text={"ok"} />
+        <Button handleClick={bad} text={"bad"} />
+        <Button handleClick={reset} text={"reset"} />
+      </div>
+      <div>good {store.getState().good}</div>
+      <div>ok {store.getState().ok}</div>
+      <div>bad {store.getState().bad}</div>
+    </>
   );
 }
 
