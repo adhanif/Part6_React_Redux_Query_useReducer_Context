@@ -9,13 +9,15 @@ const anecdotesAtStart = [
 
 const getId = () => (100000 * Math.random()).toFixed(0);
 
-const initialState = anecdotesAtStart.map((ele) => {
+const asObject = (anecdote) => {
   return {
-    content: ele,
+    content: anecdote,
     id: getId(),
     votes: 0,
   };
-});
+};
+
+const initialState = anecdotesAtStart.map(asObject);
 
 // console.log(initialState);
 
