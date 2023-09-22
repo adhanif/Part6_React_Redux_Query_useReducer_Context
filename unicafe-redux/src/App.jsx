@@ -1,8 +1,6 @@
 import "./App.css";
-// import { createStore } from "redux";
 import Button from "./components/Button";
-// import counterReducer from "./reducers/counterReducer";
-// const store = createStore(counterReducer);
+
 function App({ store }) {
   console.log(store.getState());
   const good = () => {
