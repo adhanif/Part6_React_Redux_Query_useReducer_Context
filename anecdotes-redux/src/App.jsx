@@ -6,6 +6,7 @@ import AnecdoteList from "./components/AnecdoteList";
 function App() {
   return (
     <div>
+      <h2>create new</h2>
       <AnecdoteList />
       <AnecdoteForm />
     </div>
