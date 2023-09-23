@@ -19,8 +19,6 @@ const asObject = (anecdote) => {
 
 const initialState = anecdotesAtStart.map(asObject);
 
-// console.log(initialState);
-
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "NEW":
