@@ -25,6 +25,7 @@ export default function AnecdoteForm() {
 
   return (
     <div>
+      
       <form onSubmit={addAnecdote}>
         <div>
           <input name="anecdote" />
