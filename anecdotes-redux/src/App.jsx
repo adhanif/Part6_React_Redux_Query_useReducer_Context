@@ -1,12 +1,13 @@
 import "./App.css";
-import { useDispatch, useSelector } from "react-redux";
 import AnecdoteForm from "./components/AnecdoteForm";
 import AnecdoteList from "./components/AnecdoteList";
+import FilterAnecdotes from "./components/FilterAnecdotes";
 
 function App() {
   return (
     <div>
-      <h2>create new</h2>
+      <FilterAnecdotes />
+      
       <AnecdoteList />
       <AnecdoteForm />
     </div>
