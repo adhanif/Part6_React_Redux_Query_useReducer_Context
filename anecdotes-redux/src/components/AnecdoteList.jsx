@@ -15,8 +15,6 @@ export default function AnecdoteList() {
     )
   );
 
-  const notification = useSelector((state) => state.notificaton);
-
   const orderedAnecdotes = [...anecdotes].sort((a, b) => b.votes - a.votes);
 
   const vote = (anecdote) => {
