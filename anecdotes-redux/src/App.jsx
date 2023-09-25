@@ -7,7 +7,6 @@ function App() {
   return (
     <div>
       <FilterAnecdotes />
-      
       <AnecdoteList />
       <AnecdoteForm />
     </div>
