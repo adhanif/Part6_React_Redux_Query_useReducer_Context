@@ -7,10 +7,6 @@ export default function FilterAnecdotes() {
 
   const filterChange = (e) => {
     dispatch(setFilter(e.target.value));
-    // dispatch({
-    //   type: "SET_FILTER",
-    //   payload: e.target.value,
-    // });
   };
 
   const style = {
