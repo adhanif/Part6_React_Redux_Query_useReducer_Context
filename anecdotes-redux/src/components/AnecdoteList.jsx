@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { voteChange } from "../reducer/anecdoteReducer";
 
 export default function AnecdoteList() {
   const dispatch = useDispatch();
@@ -10,16 +11,10 @@ export default function AnecdoteList() {
     )
   );
 
-
   const orderedAnecdotes = [...anecdotes].sort((a, b) => b.votes - a.votes);
 
   const vote = (id) => {
-    dispatch({
-      type: "VOTE",
-      payload: {
-        id: id,
-      },
-    });
+    dispatch(voteChange({ id }));
   };
 
   return (

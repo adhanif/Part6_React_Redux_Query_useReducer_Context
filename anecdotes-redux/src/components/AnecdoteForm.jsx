@@ -1,20 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { createAnecdote } from "../reducer/anecdoteReducer";
 
 export default function AnecdoteForm() {
   const dispatch = useDispatch();
-
-  const createAnecdote = (content) => {
-    const getId = () => (100000 * Math.random()).toFixed(0);
-    return {
-      type: "NEW",
-      payload: {
-        content: content,
-        id: getId(),
-        votes: 0,
-      },
-    };
-  };
 
   const addAnecdote = (e) => {
     e.preventDefault();

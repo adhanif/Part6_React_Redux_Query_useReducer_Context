@@ -1,14 +1,16 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { setFilter } from "../reducer/FilterAnecdotesReducer";
 
 export default function FilterAnecdotes() {
   const dispatch = useDispatch();
 
   const filterChange = (e) => {
-    dispatch({
-      type: "SET_FILTER",
-      payload: e.target.value,
-    });
+    dispatch(setFilter(e.target.value));
+    // dispatch({
+    //   type: "SET_FILTER",
+    //   payload: e.target.value,
+    // });
   };
 
   const style = {
