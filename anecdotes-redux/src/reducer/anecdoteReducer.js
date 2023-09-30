@@ -10,8 +10,6 @@ import anecdotesService from "../services/anecdotesService";
 //   "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.",
 // ];
 
-// const getId = () => (100000 * Math.random()).toFixed(0);
-
 // const asObject = (anecdote) => {
 //   return {
 //     content: anecdote,
@@ -20,6 +18,7 @@ import anecdotesService from "../services/anecdotesService";
 //   };
 // };
 
+const getId = () => Number((Math.random() * 1000000).toFixed(0));
 // const initialState = anecdotesAtStart.map(asObject);
 
 const anecdoteSlice = createSlice({
@@ -27,16 +26,25 @@ const anecdoteSlice = createSlice({
   initialState: [],
   reducers: {
     createAnecdote(state, action) {
-      state.push(action.payload);
+      const anecdote = action.payload;
+
+      state.push({
+        content: anecdote.content,
+        id: anecdote.id,
+        votes: anecdote.votes,
+      });
     },
 
     voteChange(state, action) {
-      const id = action.payload;
+      const id = action.payload.id;
+      // console.log(action.payload.id);
+      // const votes=action
       const anecDoteToChange = state.find((ele) => ele.id === id);
       const changedAnecdoteVote = {
         ...anecDoteToChange,
         votes: anecDoteToChange.votes + 1,
       };
+
       return state.map((ele) => (ele.id !== id ? ele : changedAnecdoteVote));
     },
 
@@ -64,6 +72,17 @@ export const createNewAnecdote = (content) => {
   return async (dispatch) => {
     const newAnecdote = await anecdotesService.createNew(content);
     dispatch(createAnecdote(newAnecdote));
+  };
+};
+
+export const AnecdoteVote = (anecdote) => {
+  return async (dispatch) => {
+    const updatedAnecdote = await anecdotesService.update({
+      ...anecdote,
+      votes: anecdote.votes + 1,
+    });
+    console.log(updatedAnecdote);
+    dispatch(voteChange(updatedAnecdote));
   };
 };
 

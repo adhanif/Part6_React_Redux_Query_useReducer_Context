@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { voteChange } from "../reducer/anecdoteReducer";
+import { AnecdoteVote } from "../reducer/anecdoteReducer";
 import {
   setNotification,
   removeNotification,
@@ -17,9 +17,9 @@ export default function AnecdoteList() {
 
   const orderedAnecdotes = [...anecdotes].sort((a, b) => b.votes - a.votes);
 
-  const vote = (anecdote) => {
-    dispatch(voteChange(anecdote.id));
-    dispatch(setNotification(`you voted "${anecdote.content}"`));
+  const handleVotes = (anecdote) => {
+    dispatch(AnecdoteVote(anecdote));
+    // dispatch(setNotification(`you voted "${anecdote.content}"`));
 
     setTimeout(() => {
       dispatch(removeNotification());
@@ -34,7 +34,7 @@ export default function AnecdoteList() {
           <div>{anecdote.content}</div>
           <div>
             has {anecdote.votes}
-            <button onClick={() => vote(anecdote)}>vote</button>
+            <button onClick={() => handleVotes(anecdote)}>vote</button>
           </div>
         </div>
       ))}
