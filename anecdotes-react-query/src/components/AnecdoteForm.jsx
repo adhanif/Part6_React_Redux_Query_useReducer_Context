@@ -5,8 +5,10 @@ import { createAnecdote } from "../requests";
 
 export default function AnecdoteForm() {
   const queryClient = useQueryClient();
-  const newAnecdoteMutation = useMutation({
-    createAnecdote,
+
+  // const newAnecdoteMutation = useMutation({ mutationFn: createAnecdote });
+
+  const newAnecdoteMutation = useMutation(createAnecdote, {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["anecdotes"] });
     },
@@ -17,8 +19,7 @@ export default function AnecdoteForm() {
   const addAnecdote = async (e) => {
     e.preventDefault();
     const content = e.target.anecdote.value;
-    console.log(content);
-    newAnecdoteMutation.mutate({ content });
+    newAnecdoteMutation.mutate({ content, votes: 0 });
     // dispatch(createNewAnecdote(content));
     // dispatch(Notification(`You created "${content}"`));
     e.target.anecdote.value = "";
