@@ -6,6 +6,8 @@ const NotificationReducer = (state, action) => {
       return action.payload;
     case "CREATE":
       return action.payload;
+    case "ERROR":
+      return action.payload;
     case "ZERO":
       return 0;
     default:
