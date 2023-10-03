@@ -16,46 +16,31 @@ export default function AnecdoteForm() {
         anecdotes.concat(newAnecdote)
       );
     },
-    onError: (error) => {
-      notificationDispatch({
-        type: "CREATE",
-        payload: ` "${error.response.data.error}`,
-      });
-      setTimeout(() => {
-        notificationDispatch({ type: "ZERO" });
-      }, 5000);
-    },
   });
 
   const addAnecdote = async (e) => {
     e.preventDefault();
     const content = e.target.anecdote.value;
-    newAnecdoteMutation.mutate({ content, votes: 0 });
-    notificationDispatch({
-      type: "CREATE",
-      payload: `acendote "${content}" has been created`,
-    });
-    setTimeout(() => {
-      notificationDispatch({ type: "ZERO" });
-    }, 5000);
-    // if (content.length < 5) {
-    //   notificationDispatch({
-    //     type: "CREATE",
-    //     payload: `too short acendote, must have length 5 or more`,
-    //   });
-    //   setTimeout(() => {
-    //     notificationDispatch({ type: "ZERO" });
-    //   }, 5000);
-    // } else {
-    //   newAnecdoteMutation.mutate({ content, votes: 0 });
-    //   notificationDispatch({
-    //     type: "CREATE",
-    //     payload: `acendote "${content}" has been created`,
-    //   });
-    //   setTimeout(() => {
-    //     notificationDispatch({ type: "ZERO" });
-    //   }, 5000);
-    e.target.anecdote.value = "";
+
+    if (content.length < 5) {
+      notificationDispatch({
+        type: "CREATE",
+        payload: `too short acendote, must have length 5 or more`,
+      });
+      setTimeout(() => {
+        notificationDispatch({ type: "ZERO" });
+      }, 5000);
+    } else {
+      newAnecdoteMutation.mutate({ content, votes: 0 });
+      notificationDispatch({
+        type: "CREATE",
+        payload: `acendote "${content}" has been created`,
+      });
+      setTimeout(() => {
+        notificationDispatch({ type: "ZERO" });
+      }, 5000);
+      e.target.anecdote.value = "";
+    }
   };
 
   return (
