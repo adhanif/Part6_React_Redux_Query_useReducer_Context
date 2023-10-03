@@ -12,7 +12,6 @@ const NotificationReducer = (state, action) => {
       return state;
   }
 };
-
 const AnecdoteContext = createContext();
 
 export const AnecdoteContextProvider = (props) => {
