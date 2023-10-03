@@ -8,8 +8,9 @@ import Notification from "./components/Notification";
 function App() {
   return (
     <div>
-      {/* <FilterAnecdotes />
-      <Notification /> */}
+      {/* <FilterAnecdotes /> */}
+      <h1 >Anecdotes</h1>
+      <Notification />
       <AnecdoteList />
       <AnecdoteForm />
     </div>

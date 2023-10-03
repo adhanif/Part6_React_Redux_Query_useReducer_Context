@@ -1,10 +1,12 @@
 import React from "react";
-// import { Notification } from "../reducer/NotificationReducer";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createAnecdote } from "../requests";
+import { useContext } from "react";
+import AnecdoteContext from "../AnecdoteContext.jsx";
 
 export default function AnecdoteForm() {
   const queryClient = useQueryClient();
+  const [notification, notificationDispatch] = useContext(AnecdoteContext);
 
   const newAnecdoteMutation = useMutation(createAnecdote, {
     onSuccess: (newAnecdote) => {
@@ -20,6 +22,13 @@ export default function AnecdoteForm() {
     e.preventDefault();
     const content = e.target.anecdote.value;
     newAnecdoteMutation.mutate({ content, votes: 0 });
+    notificationDispatch({
+      type: "CREATE",
+      payload: `acendote "${content}" has been created`,
+    });
+    setTimeout(() => {
+      notificationDispatch({ type: "ZERO" });
+    }, 5000);
     e.target.anecdote.value = "";
   };
 
