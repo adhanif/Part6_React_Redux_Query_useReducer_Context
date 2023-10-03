@@ -1,9 +1,12 @@
 import React from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getAnecdotes, updateAnecdote } from "../requests.js";
+import { useContext } from "react";
+import AnecdoteContext from "../AnecdoteContext.jsx";
 
 export default function AnecdoteList() {
   const queryClient = useQueryClient();
+  const [notification, notificationDispatch] = useContext(AnecdoteContext);
 
   const updatedAnecdotsMutation = useMutation(updateAnecdote, {
     onSuccess: () => {
@@ -33,11 +36,17 @@ export default function AnecdoteList() {
 
   const handleVotes = (anecdote) => {
     updatedAnecdotsMutation.mutate({ ...anecdote, votes: anecdote.votes + 1 });
+    notificationDispatch({
+      type: "VOTE",
+      payload: `acendote "${anecdote.content}" voted`,
+    });
+    setTimeout(() => {
+      notificationDispatch({ type: "ZERO" });
+    }, 5000);
   };
 
   return (
     <div>
-      <h1>Anecdotes</h1>
       {anecdotes.map((anecdote) => (
         <div key={anecdote.id}>
           <div>{anecdote.content}</div>
